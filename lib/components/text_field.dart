@@ -6,12 +6,14 @@ class NormalTextField extends StatelessWidget {
   final String hint;
   final TextInputType keyBoard;
   final Function(String)ontap;
+   IconData tileIcon;
 
   NormalTextField({
    required this.icon,
    required this.hint,
    required this.keyBoard,
-   required this.ontap
+   required this.ontap,
+     this.tileIcon=Icons.abc,
 });
 
   @override
@@ -29,6 +31,7 @@ class NormalTextField extends StatelessWidget {
         onChanged: ontap,
         keyboardType: keyBoard,
         decoration: InputDecoration(
+          suffixIcon: Icon(tileIcon),
           icon: Icon(icon,color: Colors.black,),
           hintText: hint,
           border: InputBorder.none

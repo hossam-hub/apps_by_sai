@@ -24,7 +24,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
             icon: Icon(Icons.send, color: Colors.white),
             color: Colors.green),
         ButtonState.loading:
-            IconedButton(text: 'Loading', color: Colors.deepPurple),
+            IconedButton(text: 'Loading', color: Colors.green),
         ButtonState.fail: IconedButton(
             text: 'Failed',
             icon: Icon(Icons.cancel, color: Colors.white),

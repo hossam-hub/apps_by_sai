@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width*.8,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
           ),
           child: Column(
@@ -34,9 +34,11 @@ class LoginScreen extends StatelessWidget {
                   ontap: (value) {}),
               NormalTextField(
                   icon: Icons.lock,
+                  tileIcon: Icons.remove_red_eye,
                   hint: "Password",
                   keyBoard: TextInputType.visiblePassword,
-                  ontap: (value) {}),
+                  ontap: (value) {}
+              ),
               const SizedBox(height: 10,),
               // Container(
               //   decoration: BoxDecoration(
