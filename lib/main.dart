@@ -2,10 +2,14 @@
 
 import 'dart:io';
 
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:sai_app/modules/login/login1.dart';
 import 'package:get/get.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:sai_app/modules/medical_screen/medical_screen.dart';
+
+import 'modules/home/home_screen.dart';
 
 
 
@@ -14,7 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows) {
     await DesktopWindow.setMinWindowSize(Size(500, 850));
-    await DesktopWindow.setWindowSize(Size(300,340));
+    //await DesktopWindow.setWindowSize(Size(300,340));
   }
 
   runApp(const MyApp());
@@ -26,13 +30,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return FluentApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      initialRoute: "/login",
-      getPages: [
-        GetPage(name: "/login", page: () => LoginScreen()),
+      home: HomeScreen(),
+      //initialRoute: "/login",
+      // getPages: [
+      //   GetPage(name: "/login", page: () => LoginScreen()),
+      //   GetPage(name: "/home", page: () => HomeScreen()),
+      //   GetPage(name: "/medical", page: () => MedicalScreen()),
+
         //GetPage(name: "/login", page: () => MyCustomWidget()),
-      ],
+     // ],
     );
   }
 }

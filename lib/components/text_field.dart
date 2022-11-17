@@ -6,32 +6,45 @@ class NormalTextField extends StatelessWidget {
   final String hint;
   final TextInputType keyBoard;
   final Function(String)ontap;
-   IconData tileIcon;
+  TextEditingController textController;
+  var tailIcon;
+  bool security;
+  var validator;
+
 
   NormalTextField({
    required this.icon,
    required this.hint,
    required this.keyBoard,
    required this.ontap,
-     this.tileIcon=Icons.abc,
+   required this.textController,
+    this.tailIcon,
+    this.security=false,
+    this.validator
+
 });
 
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 7),
-      padding:EdgeInsets.symmetric(horizontal: 20,vertical: 5) ,
+      margin:const EdgeInsets.symmetric(vertical: 7),
+      padding:const EdgeInsets.symmetric(horizontal: 20,vertical: 5) ,
       width: size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.green[200]
       ),
       child: TextFormField(
+        controller: textController,
+        validator: validator,
         onChanged: ontap,
         keyboardType: keyBoard,
+        obscureText: security,
+        obscuringCharacter: '*',
         decoration: InputDecoration(
-          suffixIcon: Icon(tileIcon),
+          //prefixIcon: Icon(icon,color: Colors.black,),
+          suffix: tailIcon,
           icon: Icon(icon,color: Colors.black,),
           hintText: hint,
           border: InputBorder.none
