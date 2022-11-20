@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:sai_app/home.dart';
 import 'package:sai_app/modules/login/login1.dart';
 import 'package:get/get.dart';
 import 'package:desktop_window/desktop_window.dart';
@@ -30,18 +31,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: HomeScreen(),
-      //initialRoute: "/login",
-      // getPages: [
-      //   GetPage(name: "/login", page: () => LoginScreen()),
-      //   GetPage(name: "/home", page: () => HomeScreen()),
-      //   GetPage(name: "/medical", page: () => MedicalScreen()),
+     // home: Home(),
+      initialRoute: "/login",
+      getPages: [
+        GetPage(name: "/login", page: () => LoginScreen()),
+        GetPage(name: "/home", page: () => Home()),
+        GetPage(name: "/medical", page: () => MedicalScreen()),
 
         //GetPage(name: "/login", page: () => MyCustomWidget()),
-     // ],
+     ],
     );
   }
 }

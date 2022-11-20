@@ -1,69 +1,81 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
-class MedicalScreen extends StatelessWidget {
+class MedicalScreen extends StatefulWidget {
   const MedicalScreen({Key? key}) : super(key: key);
 
   @override
+  State<MedicalScreen> createState() => _MedicalScreenState();
+}
+
+class _MedicalScreenState extends State<MedicalScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return SafeArea(
+        child: Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Card(
-            elevation: 30,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.green[200],
-
-              ),
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height*.1,
-              child: Row(
-                children: [
-                  IconButton(onPressed:(){
-                    Get.back();
-                  } , icon:Icon(Icons.arrow_back)),
-                  Text('user name:')
-                ],
-              ),
-            ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Button(
+          child: CircleAvatar(
+            backgroundColor: Colors.green,
           ),
-          InkWell(
-            onTap: (){
-
-            },
-            child: Card(
-              color: Colors.white,
-              elevation: 20,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width*.8,
-                height: 40,
-                child: Center(
-                    child: Text(
-                        'Medical Request ')
-                ),
-              ),
+              onPressed: () => showContentDialog(context),
             ),
-          ),
-          InkWell(
-            onTap: (){
+          const Text('Medical Request')
+        ],
+      ),
 
-            },
-            child: Card(
-              color: Colors.white,
-              elevation: 20,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width*.8,
-                height: 40,
-                child: const Center(
-                    child: Text(
-                        'Medical Calculater')
-                ),
-              ),
-            ),
+
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Button(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.yellow,
+                  ),
+                  onPressed: () {
+                    const ContentDialog();
+                  }),
+              const Text('Medical calculate'),
+            ],
           )
         ],
       ),
+    )
     );
+  }
+  void showContentDialog(BuildContext context) async {
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => ContentDialog(
+        title: const Text('Medical Request'),
+        content: Container(
+          child: Column(
+            children: [
+              TextBox(),
+              TextBox(),
+              TextBox(),
+            ],
+          ),
+        ),
+        actions: [
+          Button(
+            child: const Text('Submit'),
+            onPressed: () {
+              Navigator.pop(context, 'User deleted file');
+              // Delete file here
+            },
+          ),
+          FilledButton(
+            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(context, 'User canceled dialog'),
+          ),
+        ],
+      ),
+    );
+    setState(() {});
   }
 }
