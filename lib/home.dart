@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:sai_app/modules/home/home_screen.dart';
+import 'package:sai_app/modules/medical_calculate/medical_calculate_screen.dart';
 import 'package:sai_app/modules/medical_screen/medical_screen.dart';
 import 'package:sai_app/modules/setting/setting_screen.dart';
 
@@ -45,14 +46,9 @@ class _HomeState extends State<Home> {
               title: const Text('Home'),
               body: HomeScreen(),
             ),
-            PaneItem(
-              icon: const Icon(FluentIcons.heart),
-              title: const Text('Medical'),
-              infoBadge: const InfoBadge(source: Text('8')),
-              body:MedicalScreen(),
-            ),
+
             PaneItemExpander(
-              icon: const Icon(FluentIcons.account_management),
+              icon: const Icon(FluentIcons.heart),
               title: const Text('Medical'),
               body: SettingScreen(),
               items: [
@@ -62,9 +58,9 @@ class _HomeState extends State<Home> {
                   body: SettingScreen(),
                 ),
                 PaneItem(
-                  icon: const Icon(FluentIcons.calendar),
-                  title: const Text('Medical Calculate'),
-                  body: SettingScreen(),
+                  icon: const Icon(FluentIcons.calculator),
+                  title: const Text('Medical Calculator'),
+                  body: MedicalCalculateScreen(),
                 ),
               ],
             ),
