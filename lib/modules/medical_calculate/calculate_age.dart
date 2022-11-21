@@ -5,7 +5,9 @@ class AgeCalculator{
   AgeCalculator(DateTime birthdate){
     if(birthdate.year==now.year){
       if(birthdate.month==now.month){
-        age='${now.day-birthdate.day}day';
+        if(birthdate.day>13){
+          age='${now.day-birthdate.day}day';
+        }
 
       }else{
         age='${now.month-birthdate.month}  month';

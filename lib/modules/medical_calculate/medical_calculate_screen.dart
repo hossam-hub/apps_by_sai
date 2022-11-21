@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:sai_app/modules/medical_calculate/calculate_age.dart';
+import 'package:sai_app/modules/medical_calculate/date_model.dart';
 
 class MedicalCalculateScreen extends StatefulWidget {
   const MedicalCalculateScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class MedicalCalculateScreen extends StatefulWidget {
 class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
   DateTime selected=DateTime.now();
   int numberOfFamily=0;
-  List<String> ages=[
+  List<DateModel> ages=[
 
   ];
   @override
@@ -50,7 +51,7 @@ class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
                   IconButton(icon: Icon(FluentIcons.add), onPressed: (){
                     setState(() {
                       numberOfFamily++;
-                      ages.add('');
+                      ages.add(DateModel(birthDate: DateTime.now(), age: ''));
                     });
                   })
                 ],
@@ -76,12 +77,13 @@ class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
     children: [
       DatePicker(
       header: 'Birth date is:',
-      selected: selected,
+      selected: ages[index].birthDate,
       onChanged: (time) => setState(() {
         selected = time;
         if(DateTime.now().year>=time.year) {
                 AgeCalculator(selected);
-                ages[index]=AgeCalculator.age;
+                ages[index].age=AgeCalculator.age;
+                ages[index].birthDate=time;
               }
             }),
       ),
@@ -97,7 +99,7 @@ class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
               padding: EdgeInsets.zero,
               child: Center(
                 child: Text(
-                    '${ages[index]}',
+                    '${ages[index].age}',
                 ),
               ),
             ),
