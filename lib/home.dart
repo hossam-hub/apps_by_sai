@@ -4,6 +4,8 @@ import 'package:sai_app/modules/medical_calculate/medical_calculate_screen.dart'
 import 'package:sai_app/modules/medical_screen/medical_screen.dart';
 import 'package:sai_app/modules/setting/setting_screen.dart';
 
+import 'modules/medical_request/medical_request_screen.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -19,23 +21,34 @@ class _HomeState extends State<Home> {
     return FluentApp(
       debugShowCheckedModeBanner: false,
       home: NavigationView(
+
         appBar:  NavigationAppBar(
-          title: Text('My App',style: TextStyle(fontWeight: FontWeight.bold),),
+          height: MediaQuery.of(context).size.height*.15,
+          backgroundColor: Colors.green.lightest,
+          title: const Text('My App',style: TextStyle(fontWeight: FontWeight.bold),),
           actions: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Card(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Center(child: Text('User Name:',style: TextStyle(fontSize:10 ,color: Colors.grey),)),
+              children: const [
+               Card(
+                  margin: EdgeInsets.symmetric(horizontal: 40),
+                  child: Center(
+                      child: Text(
+                        'User Name:',
+                        style: TextStyle(
+                            fontSize:10 ,
+                            color: Colors.grey),
+                      )
+                  ),
                 ),
               ],
             ),
           ),
         ),
-
         pane: NavigationPane(
+          size: NavigationPaneSize(openMaxWidth: MediaQuery.of(context).size.width*.25),
           selected: topIndex,
+
           onChanged: (index) => setState(() => topIndex = index),
           displayMode: PaneDisplayMode.auto,
           items: [
@@ -50,23 +63,36 @@ class _HomeState extends State<Home> {
             PaneItemExpander(
               icon: const Icon(FluentIcons.heart),
               title: const Text('Medical'),
-              body: SettingScreen(),
+              body: MedicalScreen(),
               items: [
                 PaneItem(
                   icon: const Icon(FluentIcons.mail),
                   title: const Text('Medical Request'),
-                  body: SettingScreen(),
+                  body: MedicalRequestScreen(),
                 ),
                 PaneItem(
                   icon: const Icon(FluentIcons.calculator),
                   title: const Text('Medical Calculator'),
                   body: MedicalCalculateScreen(),
                 ),
+
               ],
             ),
           ],
+          footerItems:
+          [
+            PaneItem(
+              onTap: (){
+                setState(() {
+              });},
+              icon: const Icon(FluentIcons.settings),
+              title: const Text('Settings'),
+              body: SettingScreen(),
+            ),
+          ]
         ),
       ),
+
     );
   }
 }

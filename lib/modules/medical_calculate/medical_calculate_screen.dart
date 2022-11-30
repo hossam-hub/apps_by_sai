@@ -19,13 +19,13 @@ class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height*.1,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('Enter the number oo family members :         '),
+              const Text('Enter the number of family members :         '),
               Row(
                 children: [
                   IconButton(
@@ -61,7 +61,7 @@ class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height*.8,
+          height: MediaQuery.of(context).size.height*.7,
           child: ListView.separated(
               itemBuilder: (context,index)=>buildBirthDate(index),
               separatorBuilder: (context,index)=>SizedBox(height: 10,),

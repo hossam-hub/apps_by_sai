@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:sai_app/modules/medical_screen/medical_screen.dart';
 
-import 'modules/home/home_screen.dart';
+
 
 
 
@@ -47,16 +47,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class HomePage extends StatelessWidget {
-//   const HomePage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.green,
-//
-//       ),
-//     );
-//   }
-// }
