@@ -40,6 +40,11 @@ dependencies:
   get: ^4.6.5
   desktop_window: ^0.4.0
   progress_state_button: ^1.0.4
+  http: ^0.13.5
+  flutter_secure_storage: ^6.1.0
+
+
+
 
 dev_dependencies:
   flutter_test:

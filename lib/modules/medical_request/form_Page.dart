@@ -18,7 +18,7 @@ class FormItems {
   static FormItem secondAddressNumber = FormItem('second Address Number(Optional) :', FluentIcons.title,'');
   static FormItem gender = FormItem('Gender :', FluentIcons.transition,'');
 
-  static  List<FormItem> all = [
+  static  List all = [
     firstName,
     lastName,
     firstNameAR,
@@ -45,7 +45,7 @@ class FormPage extends StatelessWidget {
       child: GridView.builder(
         itemCount: FormItems.all.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: MediaQuery.of(context).size.width/ 2.5,
+            maxCrossAxisExtent: MediaQuery.of(context).size.width/ 3,
             mainAxisExtent: 70,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10),

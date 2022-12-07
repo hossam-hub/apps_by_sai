@@ -33,10 +33,9 @@ class _MedicalRequestScreenState extends State<MedicalRequestScreen> {
       physics: const NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) => Container(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height*.6,
-        decoration: BoxDecoration(color: Colors.white),
         child: Column(
 
           children: [

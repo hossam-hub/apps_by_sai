@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/home", page: () => Home()),
         GetPage(name: "/medical", page: () => MedicalScreen()),
 
-        //GetPage(name: "/login", page: () => MyCustomWidget()),
      ],
     );
   }
