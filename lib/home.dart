@@ -1,11 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
 import 'package:sai_app/modules/home/home_screen.dart';
 import 'package:sai_app/modules/medical_calculate/medical_calculate_screen.dart';
 import 'package:sai_app/modules/medical_screen/medical_screen.dart';
 import 'package:sai_app/modules/setting/setting_screen.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'modules/medical_request/medical_request_screen.dart';
-
+import 'package:sai_app/modules/login/login_controller.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -15,21 +16,30 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int topIndex=0;
+  final storage = const FlutterSecureStorage();
+
+
+
   @override
   Widget build(BuildContext context) {
 
     return FluentApp(
+      locale: Get.deviceLocale,
       debugShowCheckedModeBanner: false,
       home: NavigationView(
 
         appBar:  NavigationAppBar(
           height: MediaQuery.of(context).size.height*.15,
           backgroundColor: Colors.green.lightest,
-          title: const Text('My App',style: TextStyle(fontWeight: FontWeight.bold),),
+          title: const Text(
+            'My App',
+            style: TextStyle(
+                fontWeight: FontWeight.bold),
+          ),
           actions: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
+              children:  const [
                Card(
                   margin: EdgeInsets.symmetric(horizontal: 40),
                   child: Center(
@@ -53,6 +63,8 @@ class _HomeState extends State<Home> {
           displayMode: PaneDisplayMode.auto,
           items: [
             PaneItem(
+             // tileColor:ButtonState.all(Colors.transparent) ,
+             // selectedTileColor: ButtonState.all(Colors.blue),
               onTap: (){setState(() {
               });},
               icon: const Icon(FluentIcons.home),
@@ -95,4 +107,6 @@ class _HomeState extends State<Home> {
 
     );
   }
+
+
 }

@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white
+        color: Colors.transparent
       ),
       width: double.infinity,
       height: double.infinity,

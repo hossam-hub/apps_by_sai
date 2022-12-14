@@ -34,7 +34,7 @@ class FormItems {
 }
 
 class FormPage extends StatelessWidget {
-  MedicalRequestController mController=Get.put(MedicalRequestController());
+  MedicalRequestController mController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -49,20 +49,21 @@ class FormPage extends StatelessWidget {
             mainAxisExtent: 70,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10),
-          itemBuilder: (context, index)=>TextFormBox(
-
-            validator: (value){
+          itemBuilder: (context, index)=>
+              TextFormBox(
+                controller: TextEditingController(),
+                validator: (value){
               if (value!.isEmpty&&(index!=7&&index!=9)) {
                 return '${FormItems.all[index].title} must not be empty';
               }
               return null;
             },
-            onChanged: (value){
+                onChanged: (value){
 
               FormItems.all[index].data=value;
             },
-            header: FormItems.all[index].title,
-            suffix: Icon(FormItems.all[index].icon),
+                header: FormItems.all[index].title,
+                suffix: Icon(FormItems.all[index].icon),
           ),
       ),
     );

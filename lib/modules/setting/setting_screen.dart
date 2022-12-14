@@ -1,10 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-
 import 'package:get/get.dart';
-import 'package:sai_app/models/user_model.dart';
-
 import '../register/register_controller.dart';
-import 'form_model.dart';
 
 class SettingScreen extends StatelessWidget {
   RegisterController controller = Get.put(RegisterController());
@@ -56,7 +52,7 @@ class SettingScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * .5,
                       child: Form(
                         key: controller.registerKey,
-                        //autovalidateMode: AutovalidateMode.onUserInteraction,
+
                         child: GridView(
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(

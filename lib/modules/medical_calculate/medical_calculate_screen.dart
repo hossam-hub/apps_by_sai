@@ -1,20 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:sai_app/modules/medical_calculate/calculate_age.dart';
-import 'package:sai_app/modules/medical_calculate/date_model.dart';
+import 'package:get/get.dart';
 
-class MedicalCalculateScreen extends StatefulWidget {
-  const MedicalCalculateScreen({Key? key}) : super(key: key);
+import 'package:sai_app/modules/medical_calculate/medical_calculate_controller.dart';
 
-  @override
-  State<MedicalCalculateScreen> createState() => _MedicalCalculateScreenState();
-}
+class MedicalCalculateScreen extends StatelessWidget {
 
-class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
-  DateTime selected=DateTime.now();
-  int numberOfFamily=0;
-  List<DateModel> ages=[
+MedicalCalculateController controller=Get.put(MedicalCalculateController());
 
-  ];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,80 +24,122 @@ class _MedicalCalculateScreenState extends State<MedicalCalculateScreen> {
                       icon: Icon(FluentIcons.calculator_subtract),
 
                       onPressed: (){
-                    setState(() {
-                      if(numberOfFamily>0) {
-                        numberOfFamily-- ;
-                        ages.removeLast();
-                      }
-
-                    });
+                      controller.subItem();
                   }),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20)
                     ),
                     child: Center(
-                      child: Text('$numberOfFamily'),
+                      child: GetBuilder<MedicalCalculateController>(
+                        builder: (controller)=>Text('${controller.numberOfFamily}'),
+                      )
                     ),
                   ),
                   IconButton(icon: Icon(FluentIcons.add), onPressed: (){
-                    setState(() {
-                      numberOfFamily++;
-                      ages.add(DateModel(birthDate: DateTime.now(), age: ''));
-                    });
+                    controller.addItem();
                   })
                 ],
               ),
             ],
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height*.7,
-          child: ListView.separated(
-              itemBuilder: (context,index)=>buildBirthDate(index),
-              separatorBuilder: (context,index)=>SizedBox(height: 10,),
-              itemCount: numberOfFamily),
+        Form(
+          key: controller.ageFormKey,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height*.7,
+            child: GetBuilder<MedicalCalculateController>(
+              builder: (controller)=>ListView.separated(
+                  itemBuilder: (context,index)=>buildBirthDate(index),
+                  separatorBuilder: (context,index)=>const SizedBox(height: 10,),
+                  itemCount: controller.numberOfFamily),
+            )
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GetBuilder<MedicalCalculateController>(
+                builder: (controller)=>Text(
+                    controller.result+'SP')
+            ),
+            controller.isLoading.value?Obx(() => ProgressRing()):Text(''),
+            FilledButton(
+                child: const Text('Calculate'),
+                onPressed: (){
+                  controller.doCalculate();
+                }
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget buildBirthDate(int index)=> Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-    children: [
-      DatePicker(
-      header: 'Birth date is:',
-      selected: ages[index].birthDate,
-      onChanged: (time) => setState(() {
-        selected = time;
-        if(DateTime.now().year>=time.year) {
-                AgeCalculator(selected);
-                ages[index].age=AgeCalculator.age;
-                ages[index].birthDate=time;
-              }
-            }),
-      ),
-      Column(
-        children: [
-          const Text('Age is'),
-          Container(
-            margin: EdgeInsets.only(top: 0),
-            color: Colors.white,
-            width: 60,
-            height: 35,
-            child: Card(
-              padding: EdgeInsets.zero,
-              child: Center(
-                child: Text(
-                    '${ages[index].age}',
-                ),
+ Widget buildBirthDate(int index){
+    return Card(
+        child: GetBuilder<MedicalCalculateController>(
+          builder: (controller)=>Row(
+            children: [
+              const Text('enter birthdate:'),
+              DatePicker(
+                selected: controller.ages[index].birthDate,
+                onChanged: (value){
+                 controller.pickDate(value,index);
+                },
               ),
-            ),
+              Text('Age is :${controller.ages[index].age}'),
+
+            ],
           ),
-        ],
-      )
-    ],
-  );
+        )
+    );
+ }
 }
+
+
+
+// Widget buildBirthDate(int index)=> Card(
+//   backgroundColor: Colors.blue.light,
+//   child: Row(
+//     mainAxisAlignment: MainAxisAlignment.spaceAround,
+//     crossAxisAlignment: CrossAxisAlignment.center,
+//     children: [
+//       const Text('Birth date is:'),
+//       Container(
+//         width: 50,
+//         height: 50,
+//
+//       ),
+//       SizedBox(
+//         width: 200,
+//         height: 70,
+//         child: TextFormBox(
+//           controller: controller.ages[index].textController,
+//           readOnly: true,
+//         ),
+//       ),
+//       Column(
+//         children: [
+//           const Text('Age is'),
+//           Container(
+//             margin: const EdgeInsets.only(top: 0),
+//             color: Colors.white,
+//             width: 60,
+//             height: 35,
+//             child: Card(
+//               padding: EdgeInsets.zero,
+//               child: Center(
+//                 child: Text(
+//                   '',
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       )
+//     ],
+//   ),
+// );
+//

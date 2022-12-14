@@ -64,6 +64,7 @@ class RegisterController extends GetxController{
 
         );
         if(data!=null){
+          print(data);
           await storage.write(key: "name", value: data.user.fName);
           await storage.write(key: "token", value: data.token);
           registerKey.currentState!.save();

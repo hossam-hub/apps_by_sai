@@ -9,6 +9,7 @@ import 'package:sai_app/modules/login/login1.dart';
 import 'package:get/get.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:sai_app/modules/medical_screen/medical_screen.dart';
+import 'package:sai_app/modules/splash/splash_screen.dart';
 
 
 
@@ -35,13 +36,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
      // home: Home(),
-      initialRoute: "/login",
+      initialRoute: "/home",
       getPages: [
         GetPage(name: "/login", page: () => LoginScreen()),
         GetPage(name: "/home", page: () => Home()),
         GetPage(name: "/medical", page: () => MedicalScreen()),
+        GetPage(name: "/splash", page: () => SplashScreen()),
 
      ],
+      locale: Get.deviceLocale,
     );
   }
 }

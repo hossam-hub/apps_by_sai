@@ -54,15 +54,22 @@ class LoginController extends GetxController{
           await storage.write(key: "token", value: data.token);
           loginKey.currentState!.save();
           Get.toNamed('/home');
-          // Get.snackbar(
-          //           //     "Login",
-          //           //     "Login Successfully",
-          //           //     colorText: Colors.green,
-          //           //     snackPosition: SnackPosition.BOTTOM
-          //           // )
+          Get.snackbar(
+                        "Login",
+                        "Login Successfully",
+                        colorText: Colors.green,
+                        snackPosition: SnackPosition.BOTTOM
+                    );
+          tryTime=0;
 
         }else{
-          Get.snackbar("Login", "Login Filed",colorText: Colors.red);
+          Get.snackbar(
+              "Login", 
+              "Login Filed",
+              colorText: Colors.red,
+              snackPosition: SnackPosition.BOTTOM
+          );
+          tryCounter();
         }
       }finally{
         isLoading(false);
